@@ -26,11 +26,11 @@ class HomeController extends Controller
     public function index() {
 
         // Controllo per utenti loggati
-        dump(Auth::check());
+        // dump(Auth::check());
 
-        if (Auth::check()) {
-            dd(Auth::user());
-        }
+        // if (Auth::check()) {
+            // dd(Auth::user());
+        // }
         return view('welcome');
     }
 }

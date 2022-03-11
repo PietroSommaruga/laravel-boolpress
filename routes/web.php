@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', "HomeController@index");
+// disattivo per far gestire la homepage da vue
+// Route::get('/', "HomeController@index");
 
 Auth::routes();
 
@@ -40,3 +40,8 @@ Route::middleware("auth")
 
     Route::resource("comments", "CommentController");
 });
+
+
+Route::get("{any?}", function() {
+    return view("home");
+})->where("any", ".*");
