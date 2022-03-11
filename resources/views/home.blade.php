@@ -17,6 +17,12 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="appVue"></div>
+    <div id="appVue">
+        <ul>
+            <li v-for="i in 10" v-html="i"></li>
+        </ul>
+    </div>
+
+    <script src="{{ asset("js/vue.js") }}"></script>
 </body>
 </html>
