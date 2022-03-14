@@ -1,10 +1,6 @@
 <template>
     <div>
-        <h1>benvenuto in ve.js</h1>
-        <ul>
-            <li v-for="i in 10" :key="i">{{ i }}</li>
-        </ul>
-        
+            <!-- <li v-for="i in 10" :key="i">{{ i }}</li> -->
         <ExampleComponentVue></ExampleComponentVue>
     </div>
 </template>

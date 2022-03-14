@@ -111,6 +111,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -130,10 +132,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vendor_laravel_ui_src_Presets_vue_stubs_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../vendor/laravel/ui/src/Presets/vue-stubs/ExampleComponent.vue */ "./vendor/laravel/ui/src/Presets/vue-stubs/ExampleComponent.vue");
 /* harmony import */ var _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -675,21 +673,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              ),
-            ]),
-          ]),
+    return _c("div", { staticClass: "row d-flex justify-content-center" }, [
+      _c("h1", { staticClass: "text-center" }, [_vm._v("LARAVEL")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "links d-flex justify-content-around" }, [
+        _c("a", { attrs: { href: "https://laravel.com/docs" } }, [
+          _vm._v("Docs"),
         ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://laracasts.com" } }, [
+          _vm._v("Laracasts"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://laravel-news.com" } }, [
+          _vm._v("News"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://blog.laravel.com" } }, [
+          _vm._v("Blog"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://nova.laravel.com" } }, [
+          _vm._v("Nova"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://forge.laravel.com" } }, [
+          _vm._v("Forge"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://vapor.laravel.com" } }, [
+          _vm._v("Vapor"),
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "https://github.com/laravel/laravel" } }, [
+          _vm._v("GitHub"),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "links d-flex justify-content-around my-3" }, [
+        _c("a", { attrs: { href: "/admin" } }, [_vm._v("ADMIN")]),
       ]),
     ])
   },
@@ -715,23 +737,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("benvenuto in ve.js")]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        _vm._l(10, function (i) {
-          return _c("li", { key: i }, [_vm._v(_vm._s(i))])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c("ExampleComponentVue"),
-    ],
-    1
-  )
+  return _c("div", [_c("ExampleComponentVue")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
