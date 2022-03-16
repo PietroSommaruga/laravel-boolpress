@@ -1,0 +1,10 @@
+a {
+    text-decoration: none;
+    color: teal;
+    transition: all 0.5s;
+    padding: 5px;
+    border-radius: 10px;
+    &:hover {
+        background-color: rgba(0, 128, 128, 0.5);
+    }
+}

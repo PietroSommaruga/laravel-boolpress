@@ -19,7 +19,7 @@
                   <div>
                     {{ $post->title }}
                     <br>
-                    <small class="fst-italic">{{ $post->created_at }}</small>
+                    <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }}</small>
                   </div>
 
                   <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>

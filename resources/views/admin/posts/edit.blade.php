@@ -15,7 +15,7 @@
               @csrf
               @method("patch")
 
-              
+              {{-- titolo --}}
               <div class="mb-3">
                 <label>Titolo</label>
                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
@@ -25,13 +25,39 @@
                 @enderror
               </div>
 
-              
+              {{-- contenuto del post --}}
               <div class="mb-3">
                 <label>Contenuto</label>
                 <textarea name="content" rows="10" class="form-control @error('content') is-invalid @enderror"
                   placeholder="Inizia a scrivere qualcosa..." required>{{ old('content', $post->content) }}</textarea>
                 @error('content')
                   <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+
+              <div class="mb-3">
+                <label>Categoria</label>
+                <select name="category_id" class="form-select">
+                  <option value="">-- nessuna categoria --</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if ($post->category_id === $category->id) selected @endIf>
+                      {{ $category->code }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label>Tags</label><br>
+                @foreach ($tags as $tag)
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
+                      id="tag_{{ $tag->id }}" name="tags[]" {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                  </div>
+                @endforeach
+
+                @error('tags')
+                  <div class="text-red">{{ $message }}</div>
                 @enderror
               </div>
 

@@ -1,17 +1,17 @@
 <template>
     <div>
-            <!-- <li v-for="i in 10" :key="i">{{ i }}</li> -->
-        <ExampleComponentVue></ExampleComponentVue>
+        <TheNavbar></TheNavbar>
+        <!-- <ExampleComponentVue></ExampleComponentVue> -->
     </div>
 </template>
 
 <script>
-import ExampleComponent from '../../../vendor/laravel/ui/src/Presets/vue-stubs/ExampleComponent.vue';
+import TheNavbar from "../components/TheNavbar.vue";
 import ExampleComponentVue from "../components/ExampleComponent.vue";
 export default {
     components: {
         ExampleComponentVue,
-        ExampleComponent
+        TheNavbar
     }
 
 }

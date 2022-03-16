@@ -14,7 +14,7 @@
             <form action="{{ route('admin.posts.store') }}" method="post">
               @csrf
 
-              
+              {{-- titolo --}}
               <div class="mb-3">
                 <label>Titolo</label>
                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
@@ -24,7 +24,7 @@
                 @enderror
               </div>
 
-              
+              {{-- contenuto del post --}}
               <div class="mb-3">
                 <label>Contenuto</label>
                 <textarea name="content" rows="10" class="form-control @error('content') is-invalid @enderror"
@@ -39,10 +39,21 @@
                 <select name="category_id" class="form-select">
                   <option value="">-- nessuna categoria --</option>
                   @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @if (old('category_id')=== $category->id) selected @endIf>
+                    <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endIf>
                       {{ $category->code }}</option>
                   @endforeach
                 </select>
+              </div>
+
+              <div class="mb-3">
+                <label>Tags</label><br>
+                @foreach ($tags as $tag)
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
+                      id="tag_{{ $tag->id }}" name="tags[]">
+                    <label class="form-check-label" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                  </div>
+                @endforeach
               </div>
 
               <div class="form-group">
