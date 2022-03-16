@@ -11,7 +11,10 @@
             <a href="https://vapor.laravel.com">Vapor</a>
             <a href="https://github.com/laravel/laravel">GitHub</a>
         </div>
-        <div class="links d-flex justify-content-around my-3"><a href="/admin">ADMIN</a></div>
+        <div class="links d-flex justify-content-around my-3">
+            <a href="/admin">ADMIN</a>
+            <a class="links" href="/login"> LOGIN </a>
+        </div>
         
     </div>
 </template>

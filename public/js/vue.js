@@ -113,6 +113,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -712,6 +715,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "links d-flex justify-content-around my-3" }, [
         _c("a", { attrs: { href: "/admin" } }, [_vm._v("ADMIN")]),
+        _vm._v(" "),
+        _c("a", { staticClass: "links", attrs: { href: "/login" } }, [
+          _vm._v(" LOGIN "),
+        ]),
       ]),
     ])
   },
