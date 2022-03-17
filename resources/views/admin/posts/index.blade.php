@@ -15,28 +15,35 @@
           <div class="card-body">
             <ul class="list-group">
               @foreach ($posts as $post)
-                <li class="list-group-item d-flex align-items-center">
-                  <div>
-                    {{ $post->title }}
-                    <br>
+                <li class="list-group-item ">
+                  <div class="d-flex align-items-center">
+                    <div>
+                        {{ $post->title }}
+                        <br>
 
-                    @php
-                      $dateFormat = "d-m-y H:i"
-                    @endphp
+                        @php
+                          $dateFormat = "d-m-y H:i"
+                        @endphp
 
-                    <small class="fst-italic">{{ $post->created_at->format($dateFormat) }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }}</small>
+                        <small class="fst-italic">{{ $post->created_at->format($dateFormat) }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }}</small>
 
-                    <br>
+                        <br>
 
-                    @if($post->updated_at->diffInHours(date(0)) <= 12)
-                      <span>Modificato: {{$post->updated_at->diffForHumans(date(0)) }}</span>
-                    @else 
-                      <span>Modificato: {{$post->updated_at->format($dateFormat)}}</span>
-                    @endif
+                        @if($post->updated_at->diffInHours(date(0)) <= 12)
+                          <span>Modificato: {{$post->updated_at->diffForHumans(date(0)) }}</span>
+                        @else 
+                          <span>Modificato: {{$post->updated_at->format($dateFormat)}}</span>
+                        @endif
+                    </div>
+                    {{-- @include('partials.deleteBtn', [ --}}
+
+                    <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                   </div>
-                  {{-- @include('partials.deleteBtn', [ --}}
-
-                  <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+                  @if($post->image !== null)
+                    <div class="my-3 d-flex justify-content-center">
+                      <img class="index-img" src="{{$post->image}}" alt="image">
+                    </div>
+                  @endif
                 </li>
               @endforeach
             </ul>

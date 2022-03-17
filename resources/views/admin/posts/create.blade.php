@@ -34,6 +34,13 @@
                 @enderror
               </div>
 
+              <div class="my-postImage">
+                <label>Aggiungi una foto al post</label>
+
+                <input type="text" name="image" class="form-control mb-3" placeholder="Inserisci l'url di una foto" value="{{ old('image') }}">
+                
+              </div>
+
               <div class="mb-3">
                 <label>Categoria</label>
                 <select name="category_id" class="form-select">

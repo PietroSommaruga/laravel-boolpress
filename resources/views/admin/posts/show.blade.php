@@ -13,6 +13,12 @@
 
             <div class="card-body">
 
+              @if($post->image !== null)
+                  <div class="my-3 d-flex justify-content-center">
+                    <img class="show-img" src="{{$post->image}}" alt="image">
+                  </div>
+              @endif
+
               <p class="lead">
                 {!! $post->content !!}
               </p>
