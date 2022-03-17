@@ -19,8 +19,22 @@
                   <div>
                     {{ $post->title }}
                     <br>
-                    <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }}</small>
+
+                    @php
+                      $dateFormat = "d-m-y H:i"
+                    @endphp
+
+                    <small class="fst-italic">{{ $post->created_at->format($dateFormat) }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }}</small>
+
+                    <br>
+
+                    @if($post->updated_at->diffInHours(date(0)) <= 12)
+                      <span>Modificato: <i>{{$post->updated_at->diffForHumans(date(0)) }}</i></span>
+                    @else 
+                      <span>Modificato: <i>{{$post->updated_at->format($dateFormat)}}</i></span>
+                    @endif
                   </div>
+                  {{-- @include('partials.deleteBtn', [ --}}
 
                   <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                 </li>

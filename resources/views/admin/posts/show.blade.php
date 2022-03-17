@@ -18,11 +18,26 @@
               </p>
 
               <div class="my-2">
+
+                @php
+                  use Carbon\Carbon;
+                  $dateFormat = "d-m-y H:i"
+                @endphp
+
                 {{ $post->slug }}
+
                 <br>
-                Creato: {{ $post->created_at }}
-                <br>
-                Modificato: {{ $post->updated_at }}
+
+                Creato: {{ $post->created_at->format($dateFormat) }}
+
+                <br>  
+
+                @if($post->updated_at->diffInHours(date(0)) <= 12)
+                  <p>Modificato: <i>{{$post->updated_at->diffForHumans(date(0)) }}</i></p>
+                @else 
+                  <p>Modificato: <i>{{$post->updated_at->format($dateFormat)}}</i></p>
+                @endif
+                
               </div>
 
               <div class="my-2">
