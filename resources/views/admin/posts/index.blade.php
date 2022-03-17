@@ -29,9 +29,9 @@
                     <br>
 
                     @if($post->updated_at->diffInHours(date(0)) <= 12)
-                      <span>Modificato: <i>{{$post->updated_at->diffForHumans(date(0)) }}</i></span>
+                      <span>Modificato: {{$post->updated_at->diffForHumans(date(0)) }}</span>
                     @else 
-                      <span>Modificato: <i>{{$post->updated_at->format($dateFormat)}}</i></span>
+                      <span>Modificato: {{$post->updated_at->format($dateFormat)}}</span>
                     @endif
                   </div>
                   {{-- @include('partials.deleteBtn', [ --}}

@@ -33,11 +33,11 @@
                 <br>  
 
                 @if($post->updated_at->diffInHours(date(0)) <= 12)
-                  <p>Modificato: <i>{{$post->updated_at->diffForHumans(date(0)) }}</i></p>
+                  <p>Modificato: {{$post->updated_at->diffForHumans(date(0)) }}</p>
                 @else 
-                  <p>Modificato: <i>{{$post->updated_at->format($dateFormat)}}</i></p>
+                  <p>Modificato: {{$post->updated_at->format($dateFormat)}}</p>
                 @endif
-                
+
               </div>
 
               <div class="my-2">
