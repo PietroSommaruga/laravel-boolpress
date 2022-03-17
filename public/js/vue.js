@@ -128,6 +128,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -644,7 +647,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row d-flex justify-content-center" })
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -675,40 +678,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      {
-        staticClass:
-          "navbar navbar-expand-md navbar-dark bg-primary shadow-sm py-3",
-      },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
-            _vm._v("Laravel Boolpress"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "d-flex justify-content-end collapse navbar-collapse",
-              attrs: { id: "navbarSupportedContent" },
-            },
-            [
-              _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "/admin" } },
-                    [_vm._v(" Admin ")]
-                  ),
+    return _c("div", [
+      _c(
+        "nav",
+        {
+          staticClass:
+            "navbar navbar-expand-md navbar-dark bg-primary shadow-sm py-3",
+        },
+        [
+          _c("div", { staticClass: "container" }, [
+            _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
+              _vm._v("Laravel Boolpress"),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  " collapse navbar-collapse d-flex justify-content-end",
+                attrs: { id: "navbarSupportedContent " },
+              },
+              [
+                _c("ul", { staticClass: "navbar-nav ml-auto " }, [
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      { staticClass: "nav-link", attrs: { href: "/admin" } },
+                      [_vm._v(" Admin ")]
+                    ),
+                  ]),
                 ]),
-              ]),
-            ]
-          ),
-        ]),
-      ]
-    )
+              ]
+            ),
+          ]),
+        ]
+      ),
+    ])
   },
 ]
 render._withStripped = true
@@ -732,7 +737,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("TheNavbar")], 1)
+  return _c("div", [_c("TheNavbar"), _vm._v(" "), _c("ExampleComponentVue")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

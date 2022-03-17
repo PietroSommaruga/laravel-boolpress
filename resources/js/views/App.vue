@@ -1,7 +1,7 @@
 <template>
     <div>
         <TheNavbar></TheNavbar>
-        <!-- <ExampleComponentVue></ExampleComponentVue> -->
+        <ExampleComponentVue></ExampleComponentVue>
     </div>
 </template>
 
