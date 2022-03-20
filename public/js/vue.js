@@ -2010,6 +2010,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2020,27 +2027,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      pagination: {}
     };
   },
   methods: {
     fetchPosts: function fetchPosts() {
-      var _this = this;
+      var _arguments = arguments,
+          _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var resp;
+        var page, resp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts");
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
 
-              case 2:
+                if (page < 1) {
+                  page = 1;
+                }
+
+                if (page > _this.pagination.last_page) {
+                  page = _this.pagination.last_page;
+                }
+
+                _context.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts?page=" + page);
+
+              case 5:
                 resp = _context.sent;
-                _this.posts = resp.data;
+                _this.pagination = resp.data;
+                _this.posts = resp.data.data;
 
-              case 4:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3440,6 +3460,49 @@ var render = function () {
         }),
         1
       ),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination d-flex align-items-center" }, [
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                on: {
+                  click: function ($event) {
+                    return _vm.fetchPosts(_vm.pagination.current_page - 1)
+                  },
+                },
+              },
+              [_vm._v("Previous")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item px-3" }, [
+            _vm._v(
+              " " +
+                _vm._s(_vm.pagination.current_page) +
+                " su " +
+                _vm._s(_vm.pagination.last_page)
+            ),
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                on: {
+                  click: function ($event) {
+                    return _vm.fetchPosts(_vm.pagination.current_page + 1)
+                  },
+                },
+              },
+              [_vm._v("Next")]
+            ),
+          ]),
+        ]),
+      ]),
     ],
     1
   )

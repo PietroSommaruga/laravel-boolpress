@@ -11,7 +11,7 @@ class PostController extends Controller {
   use SlugGenerator;
 
   public function index() {
-    $posts = Post::all();
+    $posts = Post::paginate(8);
     $posts->load("user", "category");
 
     // $posts->load("user", "category");

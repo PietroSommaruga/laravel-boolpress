@@ -12198,6 +12198,7 @@ a {
   transition: all 0.5s;
   padding: 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 a:hover {
@@ -12212,5 +12213,9 @@ a:hover {
 .index-img {
   width: 100%;
   height: 350px;
+}
+
+.pagination li {
+  cursor: pointer;
 }
 
