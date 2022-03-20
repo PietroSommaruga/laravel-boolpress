@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div class="container">
         <TheNavbar></TheNavbar>
+        <div class=""><h1>Home</h1></div>
         <!-- <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard> -->
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard>
