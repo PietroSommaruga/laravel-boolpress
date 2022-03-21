@@ -9,6 +9,7 @@
               <em>{{ post.user.name }}; Creato il: {{ post.created_at }}</em>
               <img :src=" post.image ?  post.image : 'https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png' " alt="" class="index-img">
           </div>
+          <router-link :to="{ name:'posts.show', params: { post: post.slug } }" class="m-2">Dettagli<i class="fas fa-chevron-right ms-2"></i></router-link>
       </div>
     </div>
 

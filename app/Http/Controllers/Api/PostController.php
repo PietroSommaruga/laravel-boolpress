@@ -42,9 +42,15 @@ class PostController extends Controller {
   }
 
 
-  public function show($id){
-    $post = Post::findOrFail($id);
-    $post->load("user");
+  public function show($slug){
+    $post = Post::where("slug", $slug)
+    ->with(["tags", "user", "category"])
+    ->first();
+    // $post->load("user");
+
+    if(!$post) {
+      abort(404);
+    };
 
     return response()->json($post);
   }
