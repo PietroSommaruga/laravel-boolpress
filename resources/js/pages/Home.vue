@@ -1,19 +1,26 @@
 <template>
   <div>
     <div class="d-flex justify-content-between">
-      <div><h1>Home</h1></div>
-      <div>
+      <div class="nav-home">
+        <nav class="bg-light my-3 d-flex">
+          <button class="btn btn-outline-primary" @click="fetchPosts(pagination.current_page)">
+            Ricarica
+          </button>
+        </nav>
+      </div>
+
+      <div class="my-3"><h1>Home</h1></div>
+
+
+
+      <div class="my-3 nav-home">
           <input type="text" class="form-control" placeholder="Cerchi qualcosa?" v-model="searchText" @keydown.enter="onSearchSubmit"/>
       </div>
     </div>
 
-    <nav class="bg-light my-3 d-flex justify-content-end">
-      <button class="btn btn-outline-primary" @click="fetchPosts(pagination.current_page)">
-        <i class="fas fa-redo me-2"></i>Ricarica dati
-      </button>
-    </nav>
+    
 
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4 my-2">
           <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard>
         </div>
         <nav aria-label="Page navigation example">

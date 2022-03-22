@@ -2223,6 +2223,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4070,9 +4077,26 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "d-flex justify-content-between" }, [
+      _c("div", { staticClass: "nav-home" }, [
+        _c("nav", { staticClass: "bg-light my-3 d-flex" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-primary",
+              on: {
+                click: function ($event) {
+                  return _vm.fetchPosts(_vm.pagination.current_page)
+                },
+              },
+            },
+            [_vm._v("\n          Ricarica\n        ")]
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c("div", [
+      _c("div", { staticClass: "my-3 nav-home" }, [
         _c("input", {
           directives: [
             {
@@ -4106,27 +4130,9 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("nav", { staticClass: "bg-light my-3 d-flex justify-content-end" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-primary",
-          on: {
-            click: function ($event) {
-              return _vm.fetchPosts(_vm.pagination.current_page)
-            },
-          },
-        },
-        [
-          _c("i", { staticClass: "fas fa-redo me-2" }),
-          _vm._v("Ricarica dati\n    "),
-        ]
-      ),
-    ]),
-    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row row-cols-1 row-cols-md-2 g-4" },
+      { staticClass: "row row-cols-1 row-cols-md-2 g-4 my-2" },
       _vm._l(_vm.posts, function (post) {
         return _c("ThePostCard", { key: post.id, attrs: { post: post } })
       }),
@@ -4182,7 +4188,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Home")])])
+    return _c("div", { staticClass: "my-3" }, [_c("h1", [_vm._v("Home")])])
   },
 ]
 render._withStripped = true
