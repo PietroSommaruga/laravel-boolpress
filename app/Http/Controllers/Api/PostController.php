@@ -10,8 +10,15 @@ use Illuminate\Http\Request;
 class PostController extends Controller {
   use SlugGenerator;
 
-  public function index() {
-    $posts = Post::paginate(4);
+  public function index(Request $request) {
+    $filter = $request->input("filter");
+
+    if ($filter) {
+      $posts = Post::where("title", "LIKE", "%$filter%")->paginate(4);
+    } else {
+      $posts = Post::paginate(4);
+    }
+
     $posts->load("user", "category");
 
     // $posts->load("user", "category");

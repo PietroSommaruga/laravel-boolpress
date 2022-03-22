@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <div class="d-flex justify-content-between">
+      <div><h1>Home</h1></div>
+      <div>
+          <input type="text" class="form-control" placeholder="Cerchi qualcosa?" v-model="searchText" @keydown.enter="onSearchSubmit"/>
+      </div>
+    </div>
 
     <nav class="bg-light my-3 d-flex justify-content-end">
       <button class="btn btn-outline-primary" @click="fetchPosts(pagination.current_page)">
@@ -32,12 +37,12 @@ export default {
     return {
       posts: [],
       pagination: {},
-      user: {}
-
+      user: {},
+      searchText: "",
     };
   },
   methods: {
-    async fetchPosts(page = 1) {
+    async fetchPosts(page = 1, searchText = null) {
       if (page < 1) {
         page = 1;
       }
@@ -46,10 +51,28 @@ export default {
         page = this.pagination.last_page;
       }
 
-      const resp = await axios.get("/api/posts?page=" + page)
-      this.pagination = resp.data
-      this.posts = resp.data.data;
-    }
+      try {
+        const resp = await axios.get("/api/posts", {
+          params: {
+            page,
+            filter: searchText,
+          },
+        });
+        this.pagination = resp.data;
+        this.posts = resp.data.data;
+
+      } catch (er) {
+        console.log(er);
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 1000);
+      }
+    },
+
+    onSearchSubmit() {
+      this.fetchPosts(1, this.searchText);
+    },
   },
   mounted() {
     this.fetchPosts();

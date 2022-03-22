@@ -47,11 +47,21 @@ export default {
         .then((resp) => {
           this.user = resp.data;
           
-          console.log(resp.data);
+          localStorage.setItem("user", JSON.stringify(resp.data));
+
+          // Per comunicare in tempo reale che l'utente loggato è cambiato,
+          // lanciamo un evento custom su window
+          window.dispatchEvent(new CustomEvent("storedUserChanged"));
         })
 
         .catch((er) => {
           console.error("Utente non loggato");
+
+          localStorage.removeItem("user");
+
+          // Per comunicare in tempo reale che l'utente loggato è cambiato,
+          // lanciamo un evento custom su window
+          window.dispatchEvent(new CustomEvent("storedUserChanged"));
         });
     },
   },
