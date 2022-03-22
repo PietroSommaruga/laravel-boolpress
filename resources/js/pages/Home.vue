@@ -1,6 +1,13 @@
 <template>
   <div>
     <h1>Home</h1>
+
+    <nav class="bg-light my-3 d-flex justify-content-end">
+      <button class="btn btn-outline-primary" @click="fetchPosts(pagination.current_page)">
+        <i class="fas fa-redo me-2"></i>Ricarica dati
+      </button>
+    </nav>
+
     <div class="row row-cols-1 row-cols-md-2 g-4">
           <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard>
         </div>
@@ -24,7 +31,8 @@ export default {
    data() {
     return {
       posts: [],
-      pagination: {}
+      pagination: {},
+      user: {}
 
     };
   },

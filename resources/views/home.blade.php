@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -18,9 +18,7 @@
 </head>
 <body>
     <div id="appVue">
-        <ul>
-            <li v-for="i in 10" v-html="i"></li>
-        </ul>
+        
     </div>
 
     <script src="{{ asset("js/vue.js") }}"></script>

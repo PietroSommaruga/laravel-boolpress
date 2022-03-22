@@ -6,8 +6,13 @@
           <div class="card-body">
               <h2 class="card-title">{{ post.title }}</h2>
               <p class="card-text" v-html="post.content"></p>
+              <span v-if="post.category" class="badge bg-dark me-2">{{ post.category.code }}</span>
+              <span  v-for="tag in post.tags" :key="tag.id" class="badge bg-primary me-2">{{ tag.name }}</span>
 
-              <em>{{ post.user.name }}; Creato il: {{ post.created_at }}</em>
+              <div v-if="post">
+                <div v-if="post.user">{{ post.user.name }}; Creato il: {{ post.created_at }}</div>
+              </div>
+              
           </div>
               <img :src=" post.image ?  post.image : 'https://www.logistec.com/wp-content/uploads/2017/12/placeholder.png' " alt="" class="show-img-vue">
       </div>
@@ -37,7 +42,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.params.post);
+    // console.log(this.$route.params.post);
     this.fetchPost();
   },
 };

@@ -15,7 +15,10 @@
           </li>
           
         
-          <li class="nav-item"><a class="nav-link" href="/login"> Admin </a></li>
+          <li class="nav-item">
+              <a class="nav-link" href="/login" v-if="!user"> Login </a>
+              <a class="nav-link" href="/admin" v-else> {{ user.name }} </a>
+          </li>
         </ul>
 
       </div>
@@ -27,14 +30,36 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      routes: []
+      routes: [],
+      user: null,
     }
+  },
+  methods: {
+    fetchUser() {
+      // recuperiamo l'utente loggato tramite api
+      axios
+      .get("/api/user")
+        .then((resp) => {
+          this.user = resp.data;
+          
+          console.log(resp.data);
+        })
+
+        .catch((er) => {
+          console.error("Utente non loggato");
+        });
+    },
   },
   mounted() {
     this.routes = this.$router.getRoutes().filter((route) => !!route.meta.linkText);  // !! = doppia negazione
+
+    this.fetchUser();
+
   }
 };
 </script>

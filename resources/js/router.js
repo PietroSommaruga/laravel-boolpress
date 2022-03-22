@@ -30,9 +30,10 @@ const router  = new VueRouter({
         },
 
         {
-        path: "*",
-        component: Error,
-        name: "error",
+            path: "/not-found",
+            alias: "*",
+            component: Error,
+            name: "error"
         }
     ]
     

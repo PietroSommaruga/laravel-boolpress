@@ -1920,6 +1920,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1948,16 +1950,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      routes: []
+      routes: [],
+      user: null
     };
+  },
+  methods: {
+    fetchUser: function fetchUser() {
+      var _this = this;
+
+      // recuperiamo l'utente loggato tramite api
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/user").then(function (resp) {
+        _this.user = resp.data;
+        console.log(resp.data);
+      })["catch"](function (er) {
+        console.error("Utente non loggato");
+      });
+    }
   },
   mounted: function mounted() {
     this.routes = this.$router.getRoutes().filter(function (route) {
       return !!route.meta.linkText;
     }); // !! = doppia negazione
+
+    this.fetchUser();
   }
 });
 
@@ -2071,6 +2093,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2080,7 +2109,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       posts: [],
-      pagination: {}
+      pagination: {},
+      user: {}
     };
   },
   methods: {
@@ -2165,6 +2195,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2210,7 +2245,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    console.log(this.$route.params.post);
+    // console.log(this.$route.params.post);
     this.fetchPost();
   }
 });
@@ -3543,7 +3578,25 @@ var render = function () {
                     )
                   }),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c("li", { staticClass: "nav-item" }, [
+                    !_vm.user
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/login" },
+                          },
+                          [_vm._v(" Login ")]
+                        )
+                      : _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/admin" },
+                          },
+                          [_vm._v(" " + _vm._s(_vm.user.name) + " ")]
+                        ),
+                  ]),
                 ],
                 2
               ),
@@ -3554,18 +3607,7 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
-        _vm._v(" Admin "),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3721,6 +3763,24 @@ var render = function () {
   return _c("div", [
     _c("h1", [_vm._v("Home")]),
     _vm._v(" "),
+    _c("nav", { staticClass: "bg-light my-3 d-flex justify-content-end" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary",
+          on: {
+            click: function ($event) {
+              return _vm.fetchPosts(_vm.pagination.current_page)
+            },
+          },
+        },
+        [
+          _c("i", { staticClass: "fas fa-redo me-2" }),
+          _vm._v("Ricarica dati\n    "),
+        ]
+      ),
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row row-cols-1 row-cols-md-2 g-4" },
@@ -3800,24 +3860,49 @@ var render = function () {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-8" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h2", { staticClass: "card-title" }, [
-              _vm._v(_vm._s(_vm.post.title)),
-            ]),
-            _vm._v(" "),
-            _c("p", {
-              staticClass: "card-text",
-              domProps: { innerHTML: _vm._s(_vm.post.content) },
-            }),
-            _vm._v(" "),
-            _c("em", [
-              _vm._v(
-                _vm._s(_vm.post.user.name) +
-                  "; Creato il: " +
-                  _vm._s(_vm.post.created_at)
-              ),
-            ]),
-          ]),
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c("h2", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.post.title)),
+              ]),
+              _vm._v(" "),
+              _c("p", {
+                staticClass: "card-text",
+                domProps: { innerHTML: _vm._s(_vm.post.content) },
+              }),
+              _vm._v(" "),
+              _vm.post.category
+                ? _c("span", { staticClass: "badge bg-dark me-2" }, [
+                    _vm._v(_vm._s(_vm.post.category.code)),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.post.tags, function (tag) {
+                return _c(
+                  "span",
+                  { key: tag.id, staticClass: "badge bg-primary me-2" },
+                  [_vm._v(_vm._s(tag.name))]
+                )
+              }),
+              _vm._v(" "),
+              _vm.post
+                ? _c("div", [
+                    _vm.post.user
+                      ? _c("div", [
+                          _vm._v(
+                            _vm._s(_vm.post.user.name) +
+                              "; Creato il: " +
+                              _vm._s(_vm.post.created_at)
+                          ),
+                        ])
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+            ],
+            2
+          ),
           _vm._v(" "),
           _c("img", {
             staticClass: "show-img-vue",
@@ -19678,7 +19763,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       title: "Dettagli post"
     }
   }, {
-    path: "*",
+    path: "/not-found",
+    alias: "*",
     component: _pages_Error_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: "error"
   }]
