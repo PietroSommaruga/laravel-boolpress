@@ -10,10 +10,7 @@ a {
     }
 }
 
-.show-img {
-    width: 60%;
-    height: 300px;
-}
+
 
 .show-img-vue {
     width: 100%;
@@ -36,4 +33,9 @@ a {
 // navbar di Home.vue
 .nav-home{
     width: 200px;
+}
+
+.nav-home-down {
+    width: 80px;
+    text-align: center;
 }

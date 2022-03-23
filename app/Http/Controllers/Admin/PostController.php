@@ -9,9 +9,13 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Traits\SlugGenerator;
 
 class PostController extends Controller {
+  use SlugGenerator;
+
   /**
    * Display a listing of the resource.
    *
@@ -73,6 +77,10 @@ class PostController extends Controller {
     $post->slug = $slug;
     $post->user_id = Auth::user()->id;
 
+    if (key_exists("image", $data)) {
+      $post->image = Storage::put("postimages", $data["image"]);
+    }
+
     $post->save();
     $post->tags()->attach($data["tags"]);
 
@@ -118,13 +126,16 @@ class PostController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request, $id) {
+
+
     $data = $request->validate([
       "title" => "required|min:5",
       "content" => "required|min:20",
-      "image" => "nullable",
+      "image" => "nullable|max:500",
       "category_id" => "nullable|exists:categories,id",
-      "tags" => "nullable"
+      "tags" => "nullable|exists:tags,id"
     ]);
+    
 
     $post = Post::findOrFail($id);
 
@@ -133,6 +144,18 @@ class PostController extends Controller {
     }
 
     $post->update($data);
+
+    if (key_exists("image", $data)) {
+
+      if ($post->coverImg) {
+        Storage::delete($post->coverImg);
+      }
+
+      $image = Storage::put("postimages", $data["image"]);
+
+      $post->image = $image;
+      $post->save();
+    }
 
     if (key_exists("tags", $data)) {
       $post->tags()->sync($data["tags"]);
@@ -156,23 +179,4 @@ class PostController extends Controller {
     $post->delete();
   }
 
-  protected function generateUniqueSlug($postTitle) {
-    $slug = Str::slug($postTitle);
-
-    $exists = Post::where("slug", $slug)->first();
-    $counter = 1;
-
-    while ($exists) {
-      $newSlug = $slug . "-" . $counter;
-      $counter++;
-
-      $exists = Post::where("slug", $newSlug)->first();
-
-      if (!$exists) {
-        $slug = $newSlug;
-      }
-    }
-
-    return $slug;
-  }
 }

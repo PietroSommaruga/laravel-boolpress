@@ -41,7 +41,11 @@
                   </div>
                   @if($post->image !== null)
                     <div class="my-3 d-flex justify-content-center">
-                      <img class="index-img" src="{{$post->image}}" alt="image">
+                      <img class="img-fluid"src="{{ asset("storage/" . $post->image) }}" alt="image" class="img-fluid">
+                    </div>
+                  @else
+                    <div class="my-3 d-flex justify-content-center">
+                      <img class="img-fluid"src="https://via.placeholder.com/450" alt="image" class="img-fluid">
                     </div>
                   @endif
                 </li>

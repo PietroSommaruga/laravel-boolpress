@@ -12205,11 +12205,6 @@ a:hover {
   background-color: rgba(0, 128, 128, 0.5);
 }
 
-.show-img {
-  width: 60%;
-  height: 300px;
-}
-
 .show-img-vue {
   width: 100%;
   height: 400px;
@@ -12226,5 +12221,10 @@ a:hover {
 
 .nav-home {
   width: 200px;
+}
+
+.nav-home-down {
+  width: 80px;
+  text-align: center;
 }
 

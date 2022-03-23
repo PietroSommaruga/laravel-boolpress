@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="px-3">
     <h1>Contatti</h1>
 
     <div v-if="!formSubmitted">

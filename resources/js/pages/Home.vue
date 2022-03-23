@@ -21,13 +21,13 @@
     
 
     <div class="row row-cols-1 row-cols-md-2 g-4 my-2">
-          <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard>
-        </div>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination d-flex align-items-center">
-            <li class="page-item"> <a class="page-link" @click="fetchPosts(pagination.current_page - 1)">Previous</a ></li>
-            <li class="page-item px-3"> {{ pagination.current_page }} su {{ pagination.last_page }}</li>
-            <li class="page-item"><a class="page-link" @click="fetchPosts(pagination.current_page + 1)">Next</a></li>
+        <ThePostCard v-for="post of posts" :key="post.id" :post="post"></ThePostCard>
+      </div>
+        <nav aria-label="Page navigation example" class="">
+          <ul class="pagination d-flex align-items-center justify-content-center my-3">
+            <li class="page-item"> <a class="btn btn-outline-primary nav-home-down" @click="fetchPosts(pagination.current_page - 1)">Previous</a ></li>
+            <li class="page-item nav-home-down"> {{ pagination.current_page }} su {{ pagination.last_page }}</li>
+            <li class="page-item"><a class="btn btn-outline-primary nav-home-down" @click="fetchPosts(pagination.current_page + 1)">Next</a></li>
           </ul>
         </nav>
   </div>

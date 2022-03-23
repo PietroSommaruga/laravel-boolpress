@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header d-flex">
+            <div class="card-header d-flex align-items-center">
               <a href="{{ route('admin.posts.index') }}" class="me-2"> <- </a>
                   {{ $post->title }}
                   <a class="ms-auto" href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
@@ -15,8 +15,12 @@
 
               @if($post->image !== null)
                   <div class="my-3 d-flex justify-content-center">
-                    <img class="show-img" src="{{$post->image}}" alt="image">
+                    <img class="img-fluid"src="{{ asset("storage/" . $post->image) }}" alt="image" class="img-fluid">
                   </div>
+              @else
+              <div class="my-3 d-flex justify-content-center">
+                <img class="img-fluid"src="https://via.placeholder.com/150" alt="image" class="img-fluid">
+              </div>
               @endif
 
               <p class="lead">

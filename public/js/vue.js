@@ -3860,7 +3860,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "px-3" }, [
     _c("h1", [_vm._v("Contatti")]),
     _vm._v(" "),
     !_vm.formSubmitted
@@ -4140,46 +4140,53 @@ var render = function () {
     ),
     _vm._v(" "),
     _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c("ul", { staticClass: "pagination d-flex align-items-center" }, [
-        _c("li", { staticClass: "page-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "page-link",
-              on: {
-                click: function ($event) {
-                  return _vm.fetchPosts(_vm.pagination.current_page - 1)
+      _c(
+        "ul",
+        {
+          staticClass:
+            "pagination d-flex align-items-center justify-content-center my-3",
+        },
+        [
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-outline-primary nav-home-down",
+                on: {
+                  click: function ($event) {
+                    return _vm.fetchPosts(_vm.pagination.current_page - 1)
+                  },
                 },
               },
-            },
-            [_vm._v("Previous")]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item px-3" }, [
-          _vm._v(
-            " " +
-              _vm._s(_vm.pagination.current_page) +
-              " su " +
-              _vm._s(_vm.pagination.last_page)
-          ),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "page-link",
-              on: {
-                click: function ($event) {
-                  return _vm.fetchPosts(_vm.pagination.current_page + 1)
+              [_vm._v("Previous")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item nav-home-down" }, [
+            _vm._v(
+              " " +
+                _vm._s(_vm.pagination.current_page) +
+                " su " +
+                _vm._s(_vm.pagination.last_page)
+            ),
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-outline-primary nav-home-down",
+                on: {
+                  click: function ($event) {
+                    return _vm.fetchPosts(_vm.pagination.current_page + 1)
+                  },
                 },
               },
-            },
-            [_vm._v("Next")]
-          ),
-        ]),
-      ]),
+              [_vm._v("Next")]
+            ),
+          ]),
+        ]
+      ),
     ]),
   ])
 }
