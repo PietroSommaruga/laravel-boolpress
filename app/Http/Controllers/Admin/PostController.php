@@ -61,9 +61,7 @@ class PostController extends Controller {
 
     $post = new Post();
     $post->fill($data);
-
     $slug = Str::slug($post->title);
-
     $exists = Post::where("slug", $slug)->first();
     $counter = 1;
 
@@ -144,7 +142,6 @@ class PostController extends Controller {
       "tags" => "nullable|exists:tags,id"
     ]);
     
-
     $post = Post::findOrFail($id);
 
     if ($data["title"] !== $post->title) {
