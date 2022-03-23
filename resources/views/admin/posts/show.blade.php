@@ -64,12 +64,13 @@
               @endif
 
               @if ($post->tags !== null)
-                <div class="my-2">tags:
-                  @foreach ($post->tags as $tag)
-                    <span class="bg-light">{{ $tag->name }}</span>
-                  @endforeach
-                </div>
-              @endif
+              <div class="my-3">
+                tags:
+                @foreach ($post->tags as $tag)
+                  <span class="bg-light">{{ $tag->name }}</span>
+                @endforeach
+              </div>
+            @endif
 
             </div>
           </div>

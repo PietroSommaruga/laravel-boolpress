@@ -16,6 +16,8 @@ use App\Traits\SlugGenerator;
 class PostController extends Controller {
   use SlugGenerator;
 
+
+
   /**
    * Display a listing of the resource.
    *
@@ -40,6 +42,8 @@ class PostController extends Controller {
     return view("admin.posts.create", compact("categories", "tags"));
   }
 
+
+
   /**
    * Store a newly created resource in storage.
    *
@@ -50,9 +54,9 @@ class PostController extends Controller {
     $data = $request->validate([
       "title" => "required|min:5",
       "content" => "required|min:20",
-      "image" => "nullable",
       "category_id" => "nullable",
-      "tags" => "nullable"
+      "tags" => "nullable",
+      "image" => "nullable",
     ]);
 
     $post = new Post();
@@ -84,9 +88,10 @@ class PostController extends Controller {
     $post->save();
     $post->tags()->attach($data["tags"]);
 
-
     return redirect()->route("admin.posts.index");
   }
+
+
 
   /**
    * Display the specified resource.
@@ -99,6 +104,8 @@ class PostController extends Controller {
 
     return view("admin.posts.show", compact("post"));
   }
+
+
 
   /**
    * Show the form for editing the specified resource.
@@ -118,6 +125,8 @@ class PostController extends Controller {
     ]);
   }
 
+
+
   /**
    * Update the specified resource in storage.
    *
@@ -126,7 +135,6 @@ class PostController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request, $id) {
-
 
     $data = $request->validate([
       "title" => "required|min:5",
@@ -152,7 +160,6 @@ class PostController extends Controller {
       }
 
       $image = Storage::put("postimages", $data["image"]);
-
       $post->image = $image;
       $post->save();
     }
@@ -163,6 +170,8 @@ class PostController extends Controller {
 
     return redirect()->route("admin.posts.show", $post->slug);
   }
+
+
 
   /**
    * Remove the specified resource from storage.
