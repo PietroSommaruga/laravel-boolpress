@@ -2156,7 +2156,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formDataInstance.append("name", _this.formData.name);
                 formDataInstance.append("email", _this.formData.email);
                 formDataInstance.append("message", _this.formData.message);
-                formDataInstance.append("attachment", _this.formData.attachment);
+
+                if (_this.formData.attachment) {
+                  formDataInstance.append("attachment", _this.formData.attachment);
+                }
+
                 _context.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", formDataInstance);
 
@@ -2389,12 +2393,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       post: {}
     };
+  },
+  computed: {
+    createdAt: function createdAt() {
+      return dayjs(this.post.created_at).format("DD/MM/YY HH:mm");
+    },
+    updatedAt: function updatedAt() {
+      return dayjs(this.post.updated_at).format("DD/MM/YY HH:mm");
+    }
   },
   methods: {
     fetchPost: function fetchPost() {
@@ -2431,10 +2444,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 7]]);
       }))();
+    },
+    deletePost: function deletePost() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("api/posts/" + _this2.$route.params.post);
+
+              case 3:
+                _this2.$router.replace({
+                  name: "posts.index"
+                });
+
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
+      }))();
     }
   },
   mounted: function mounted() {
-    // console.log(this.$route.params.post);
+    console.log(this.$route.params.post);
     this.fetchPost();
   }
 });
@@ -4295,6 +4341,15 @@ var render = function () {
             "div",
             { staticClass: "card-body" },
             [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: { click: _vm.deletePost },
+                },
+                [_vm._v("Elimina")]
+              ),
+              _vm._v(" "),
               _c("h2", { staticClass: "card-title" }, [
                 _vm._v(_vm._s(_vm.post.title)),
               ]),

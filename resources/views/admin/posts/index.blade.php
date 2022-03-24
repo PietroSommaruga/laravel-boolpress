@@ -34,10 +34,24 @@
                         @else 
                           <span>Modificato: {{$post->updated_at->format($dateFormat)}}</span>
                         @endif
-                    </div>
-                    {{-- @include('partials.deleteBtn', [ --}}
 
-                    <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+
+                        @if ($post->trashed())
+                          <span class="position-absolute top20 end-0 translate-middle badge rounded-pill bg-danger p-2">POST ARCHIVIATO</span>
+                        @endif
+
+
+                        
+                    </div>
+                    <div class="d-flex">
+                      @include('partials.deleteBtn', [
+                        'id' => $post->id,
+                        'route' => 'admin.posts.destroy',
+                      ])
+
+                      <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+                    </div>
+                    
                   </div>
                   @if($post->image !== null)
                     <div class="my-3 d-flex justify-content-center">

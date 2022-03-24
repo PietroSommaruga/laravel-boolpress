@@ -1,8 +1,9 @@
-<form action="{{ route($route, $id) }}" method="POST">
-@csrf
-@method('delete')
-
-<button type="submit" class="btn">
-    <i class="fa-regular fa-trash-can"></i>
-</button>
-</form>
+<form action="{{ route($route, $id) }}" method="POST" class="d-inline-block">
+    @csrf
+    @method("delete")
+  
+    <button type="submit" class="btn btn-link text-danger">
+      Elimina
+    </button>
+  </form>
+  

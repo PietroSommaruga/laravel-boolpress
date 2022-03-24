@@ -21,6 +21,8 @@ Route::middleware('auth')->get('/user', function (Request $request) {
 
 
 Route::get("/posts", "Api\PostController@index");
-Route::post("/posts", "Api\PostController@store");
 Route::get("/posts/{post}", "Api\PostController@show");
+
+Route::middleware('auth')->post("/posts", "Api\PostController@store");
+Route::middleware('auth')->delete("/posts/{post}", "Api\PostController@destroy");
 Route::post("/contacts", "Api\ContactController@store");

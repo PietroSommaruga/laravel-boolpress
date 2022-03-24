@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Contact;
 use App\Http\Controllers\Controller;
+use App\Mail\NewSiteContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller {
@@ -18,10 +20,14 @@ class ContactController extends Controller {
 
     $newContact = new Contact();
     $newContact->fill($data);
+
     if(key_exists("attachment", $data)){
       $newContact->attachment = Storage::put("contactAttachments", $data["attachment"]);
     }
     $newContact->save();
+
+    // mail
+    Mail::to("admin@gmail.com")->send(new NewSiteContactMail($newContact));
 
     return response()->json($newContact);
   }

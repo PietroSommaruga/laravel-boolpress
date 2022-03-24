@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller {
   use SlugGenerator;
@@ -70,5 +71,20 @@ class PostController extends Controller {
     };
 
     return response()->json($post);
+  }
+
+  public function destroy($slug){
+    $post = Post::where("slug", $slug)->first();
+
+    // toglie tutti i collegamenti con eventuali tag
+    $post->tags()->detach();
+
+    if ($post->coverImg) {
+      Storage::delete($post->coverImg);
+    }
+
+    $post->delete();
+
+    return response()->json();
   }
 }

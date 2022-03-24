@@ -25,7 +25,8 @@ class PostController extends Controller {
    */
   public function index() {
     // $posts = Post::all();
-    $posts = Post::where("user_id", Auth::user()->id)->get();
+    $posts = Post::where("user_id", Auth::user()->id)
+    ->withTrashed()->get();
 
     return view("admin.posts.index", compact("posts"));
   }
@@ -177,12 +178,21 @@ class PostController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function destroy($id) {
-    $post = Post::findOrFail($id);
+    $post = Post::withTrashed()->findOrFail($id);
 
-    $post->tags()->detach();
-    // $post->tags()->sync([]);
+    if ($post->trashed()) {
+      $post->tags()->detach();
 
-    $post->delete();
+      if ($post->image) {
+        Storage::delete($post->image);
+      }
+
+      $post->forceDelete();
+    } else {
+      $post->delete();
+    }
+
+    return redirect()->route("admin.posts.index");
   }
 
 }
