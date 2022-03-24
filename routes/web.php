@@ -17,28 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/admin', 'Admin\HomeController@index')->name('admin.home');
-// Route::get('/admin/products', 'Admin\ProductController@index')->name('admin.product.index');
-// Route::get('/admin/products/create', 'Admin\ProductController@index')->name('admin.product.create');
-// Route::get('/admin/products/edit', 'Admin\ProductController@index')->name('admin.product.edit');
-// Route::get('/admin/posts', 'Admin\PostController@index')->name('admin.post.index');
-// Route::get('/admin/posts/create', 'Admin\PostController@index')->name('admin.post.create');
-// Route::get('/admin/posts/edit', 'Admin\PostController@index')->name('admin.post.edit');
-
 Route::middleware("auth")
 ->namespace("Admin")
 ->prefix("admin")
 ->name("admin.")
 ->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
-    // Route::get('/products', 'ProductController@index')->name('product.index');
-    // Route::get('/products/create', 'ProductController@index')->name('product.create');
-    // Route::get('/products/edit', 'ProductController@index')->name('product.edit');
 
     Route::resource("posts", "PostController");
-
     Route::resource("comments", "CommentController");
-    Route::get("users", "UserController@index")->name("users.index");
+    Route::resource("users", "UserController");
+
+    Route::get("contacts", "ContactController@index")->name("contacts.index");
 });
 
 

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller {
   use SlugGenerator;
 
+
+
   public function index(Request $request) {
     $filter = $request->input("filter");
 
@@ -21,11 +23,18 @@ class PostController extends Controller {
 
     $posts->load("user", "category");
 
-    // $posts->load("user", "category");
-
+    $posts->each(function ($post) {
+      if ($post->image) {
+        $post->image = asset("storage/" . $post->image);
+      }else{
+        $post->image = "https://via.placeholder.com/1024x480";
+      }
+    });
 
     return response()->json($posts);
   }  
+
+
 
   public function store(Request $request) {
     $data = $request->validate([
@@ -47,6 +56,7 @@ class PostController extends Controller {
 
     return response()->json($newPost);
   }
+
 
 
   public function show($slug){

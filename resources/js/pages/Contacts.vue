@@ -6,7 +6,7 @@
         <div class="mb-3">
           <label for="exampleFormControlInput2" class="form-label"
             >Nome / Cognome</label>
-          <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Mario Rossi" v-model="formData.name"/>
+          <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Giovanni Giorgi" v-model="formData.name"/>
           <span class="text-danger" v-if="formValidationErrors && formValidationErrors.name" >
             {{ formValidationErrors.name }}
           </span>
@@ -33,6 +33,24 @@
         <span class="text-danger" v-if="formValidationErrors && formValidationErrors.message">
           {{ formValidationErrors.message }}
         </span>
+      </div>
+
+      <!-- Attachment -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput3" class="form-label"
+          >Allegato</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          id="exampleFormControlInput3"
+          @change="onAttachmentChange"
+        />
+        <span
+          class="text-danger"
+          v-if="formValidationErrors && formValidationErrors.attachment"
+          >{{ formValidationErrors.attachment }}</span
+        >
       </div>
 
       <div>
@@ -63,6 +81,7 @@ export default {
         name: "",
         email: "",
         message: "",
+        attachment: null,
       },
       formValidationErrors: null,
     };
@@ -71,7 +90,14 @@ export default {
     async formSubmit() {
       try {
         this.formValidationErrors = null;
-        const resp = await axios.post("/api/contacts", this.formData);
+
+        const formDataInstance = new FormData();
+        formDataInstance.append("name", this.formData.name);
+        formDataInstance.append("email", this.formData.email);
+        formDataInstance.append("message", this.formData.message);
+        formDataInstance.append("attachment", this.formData.attachment);
+
+        const resp = await axios.post("/api/contacts", formDataInstance);
 
         this.formSubmitted = true;
       } catch (er) {
@@ -84,8 +110,11 @@ export default {
         );
       }
     },
+     onAttachmentChange(event) {
+      this.formData.attachment = event.target.files[0];
   },
-};
+ }
+}
 </script>
 
 <style></style>
